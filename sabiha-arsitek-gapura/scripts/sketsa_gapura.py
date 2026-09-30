@@ -14,8 +14,8 @@ import argparse
 import html
 
 p = argparse.ArgumentParser()
-p.add_argument("--bukaan", type=float, default=4.5, help="lebar bukaan bersih antar pedestal")
-p.add_argument("--ped-lebar", type=float, default=1.2, help="lebar pedestal (arah jalan melintang)")
+p.add_argument("--bukaan", type=float, default=6.0, help="lebar bukaan bersih antar pedestal")
+p.add_argument("--ped-lebar", type=float, default=1.5, help="lebar pedestal (arah jalan melintang)")
 p.add_argument("--ped-dalam", type=float, default=1.2, help="kedalaman pedestal (arah jalan memanjang)")
 p.add_argument("--ped-tinggi", type=float, default=2.0, help="tinggi pedestal beton")
 p.add_argument("--tinggi-tiang", type=float, default=1.0, help="tinggi tiang baja di atas pedestal")
@@ -23,7 +23,8 @@ p.add_argument("--overhang", type=float, default=1.0, help="teritis atap di luar
 p.add_argument("--dalam-atap", type=float, default=3.0, help="kedalaman atap (arah jalan)")
 p.add_argument("--tinggi-atap", type=float, default=0.8, help="tinggi atap dari tepi ke bubungan")
 p.add_argument("--nama", default="GAPURA SEKOLAH")
-p.add_argument("--out", default="sketsa-gapura-v1", help="nama file tanpa ekstensi")
+p.add_argument("--versi", default="v2", help="label versi di blok judul")
+p.add_argument("--out", default="sketsa-gapura-v2", help="nama file tanpa ekstensi")
 a = p.parse_args()
 
 B, PW, PD, PH = a.bukaan, a.ped_lebar, a.ped_dalam, a.ped_tinggi
@@ -177,7 +178,7 @@ text(fx(OV + PW / 2), fy(PH / 2) + 15, "beton plester", 11, c="#444")
 text(fx(W / 2), fy(Y_EAVE) - 6, "atap spandek", 11, c="#fff")
 
 # ================================================================ TAMPAK SAMPING
-SX0, SGY = 930, 480
+SX0, SGY = 1040, 480
 
 
 def sx(m):
@@ -269,7 +270,7 @@ rect(930, 1000, 450, 100, "none", INK, 1.6)
 line(930, 1030, 1380, 1030, 1)
 text(1155, 1022, "SABIHA ARSITEK", 15, w="bold")
 text(940, 1052, f"Proyek : {a.nama}", 12, "start")
-text(940, 1070, "Tahap  : Sketsa konsep v1 (sebelum RAB)", 12, "start")
+text(940, 1070, f"Tahap  : Sketsa konsep {a.versi} (sebelum RAB)", 12, "start")
 text(940, 1088, "Satuan : meter   |   Tanpa skala baku", 12, "start")
 
 add("</svg>")

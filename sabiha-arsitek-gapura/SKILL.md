@@ -39,12 +39,12 @@ Dimensi asumsi awal (dari foto, **wajib diverifikasi di lokasi**):
 
 | Bagian | Nilai |
 |---|---|
-| Bukaan bersih | 4,50 m |
-| Pedestal | 1,20 x 1,20 x 2,00 m |
+| Bukaan bersih | 6,00 m |
+| Pedestal | 1,50 (lebar) x 1,20 x 2,00 m |
 | Tiang baja di atas pedestal | 1,00 m |
 | Tinggi bebas bawah balok | 3,00 m |
 | Teritis atap di luar pedestal | 1,00 m |
-| Atap | lebar 8,90 m, dalam 3,00 m, tinggi 0,80 m |
+| Atap | lebar 11,00 m, dalam 3,00 m, tinggi 0,80 m |
 | Tinggi total | sekitar 4,05 m |
 
 Aturan saat menggambar:
@@ -72,5 +72,5 @@ sabiha-arsitek-gapura/
   SKILL.md
   scripts/sketsa_gapura.py
   references/foto-referensi-gapura.jpg
-  examples/sketsa-gapura-v1.png (+ .svg)
+  examples/sketsa-gapura-v1.png, sketsa-gapura-v2.png (+ .svg)
 ```
