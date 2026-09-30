@@ -1,5 +1,5 @@
-<svg xmlns="http://www.w3.org/2000/svg" width="1900" height="1006" viewBox="0 0 1900 1006">
-<rect width="1900" height="1006" fill="#fbfaf6"/>
+<svg xmlns="http://www.w3.org/2000/svg" width="1900" height="1046" viewBox="0 0 1900 1046">
+<rect width="1900" height="1046" fill="#fbfaf6"/>
 <text x="950.0" y="70" font-family="Helvetica, Arial" font-size="44" font-weight="bold" text-anchor="middle" fill="#2b2b2b">Desain Mural Sapta Pesona - Tema Hutan Alam</text>
 <text x="950.0" y="112" font-family="Helvetica, Arial" font-size="24" text-anchor="middle" fill="#555">Ukuran dinding 6 x 4 m  |  SABIHA Arsitek</text>
 <svg x="50" y="150" width="580" height="387" viewBox="0 0 1800 1200">
@@ -735,8 +735,8 @@
 <rect x="1003" y="837" width="34" height="34" rx="6" fill="#333333" stroke="#999" stroke-width="1.5"/>
 <rect x="1044" y="837" width="34" height="34" rx="6" fill="#9fb7c9" stroke="#999" stroke-width="1.5"/>
 <svg x="1300" y="150" width="580" height="387" viewBox="0 0 1800 1200">
-<defs><linearGradient id="sky3r2" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#8fd3f0"/><stop offset="1" stop-color="#e6f7fc"/></linearGradient></defs>
-<rect x="0.0" y="0.0" width="1800.0" height="760.0" rx="0.0" fill="url(#sky3r2)"/>
+<defs><linearGradient id="sky3_r2" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#8fd3f0"/><stop offset="1" stop-color="#e6f7fc"/></linearGradient></defs>
+<rect x="0.0" y="0.0" width="1800.0" height="760.0" rx="0.0" fill="url(#sky3_r2)"/>
 <line x1="1490.0" y1="252.0" x2="1525.0" y2="252.0" stroke="#ffd34d" stroke-width="14.0" stroke-linecap="round"/>
 <line x1="1477.3" y1="299.5" x2="1507.6" y2="317.0" stroke="#ffd34d" stroke-width="14.0" stroke-linecap="round"/>
 <line x1="1442.5" y1="334.3" x2="1460.0" y2="364.6" stroke="#ffd34d" stroke-width="14.0" stroke-linecap="round"/>
@@ -1187,7 +1187,8 @@
 <ellipse cx="1308.0" cy="175.0" rx="20.0" ry="10.0" fill="#4c9f45" transform="rotate(-30 1308.0 175.0)"/>
 <ellipse cx="1292.0" cy="183.0" rx="20.0" ry="10.0" fill="#4c9f45" transform="rotate(-30 1292.0 183.0)"/>
 <ellipse cx="1276.0" cy="191.0" rx="20.0" ry="10.0" fill="#4c9f45" transform="rotate(-30 1276.0 191.0)"/>
-<text x="900.0" y="134.0" font-family="Arial Rounded MT Bold, Helvetica, Arial, sans-serif" font-size="78.0" font-weight="bold" text-anchor="middle" fill="#ffffff" stroke="#7a4a26" stroke-width="6.0" paint-order="stroke">SAPTA PESONA</text>
+<text x="900.0" y="134.0" font-family="Arial Rounded MT Bold, Helvetica, Arial, sans-serif" font-size="78.0" font-weight="bold" text-anchor="middle" fill="#7a4a26" stroke="#7a4a26" stroke-width="12.0" stroke-linejoin="round">SAPTA PESONA</text>
+<text x="900.0" y="134.0" font-family="Arial Rounded MT Bold, Helvetica, Arial, sans-serif" font-size="78.0" font-weight="bold" text-anchor="middle" fill="#ffffff">SAPTA PESONA</text>
 <path d="M812.3,814.2 L816.3,796.2 M820.3,814.2 L820.3,790.2 M828.3,814.2 L824.3,796.2" fill="none" stroke="#4f9a44" stroke-width="3.0" stroke-linecap="round" stroke-linejoin="round"/>
 <path d="M1159.7,1109.5 L1163.7,1091.5 M1167.7,1109.5 L1167.7,1085.5 M1175.7,1109.5 L1171.7,1091.5" fill="none" stroke="#4f9a44" stroke-width="3.0" stroke-linecap="round" stroke-linejoin="round"/>
 <path d="M1391.5,956.1 L1395.5,938.1 M1399.5,956.1 L1399.5,932.1 M1407.5,956.1 L1403.5,938.1" fill="none" stroke="#4f9a44" stroke-width="3.0" stroke-linecap="round" stroke-linejoin="round"/>

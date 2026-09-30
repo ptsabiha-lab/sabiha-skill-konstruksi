@@ -451,7 +451,8 @@
 <ellipse cx="1308.0" cy="175.0" rx="20.0" ry="10.0" fill="#4c9f45" transform="rotate(-30 1308.0 175.0)"/>
 <ellipse cx="1292.0" cy="183.0" rx="20.0" ry="10.0" fill="#4c9f45" transform="rotate(-30 1292.0 183.0)"/>
 <ellipse cx="1276.0" cy="191.0" rx="20.0" ry="10.0" fill="#4c9f45" transform="rotate(-30 1276.0 191.0)"/>
-<text x="900.0" y="134.0" font-family="Arial Rounded MT Bold, Helvetica, Arial, sans-serif" font-size="78.0" font-weight="bold" text-anchor="middle" fill="#ffffff" stroke="#7a4a26" stroke-width="6.0" paint-order="stroke">SAPTA PESONA</text>
+<text x="900.0" y="134.0" font-family="Arial Rounded MT Bold, Helvetica, Arial, sans-serif" font-size="78.0" font-weight="bold" text-anchor="middle" fill="#7a4a26" stroke="#7a4a26" stroke-width="12.0" stroke-linejoin="round">SAPTA PESONA</text>
+<text x="900.0" y="134.0" font-family="Arial Rounded MT Bold, Helvetica, Arial, sans-serif" font-size="78.0" font-weight="bold" text-anchor="middle" fill="#ffffff">SAPTA PESONA</text>
 <path d="M812.3,814.2 L816.3,796.2 M820.3,814.2 L820.3,790.2 M828.3,814.2 L824.3,796.2" fill="none" stroke="#4f9a44" stroke-width="3.0" stroke-linecap="round" stroke-linejoin="round"/>
 <path d="M1159.7,1109.5 L1163.7,1091.5 M1167.7,1109.5 L1167.7,1085.5 M1175.7,1109.5 L1171.7,1091.5" fill="none" stroke="#4f9a44" stroke-width="3.0" stroke-linecap="round" stroke-linejoin="round"/>
 <path d="M1391.5,956.1 L1395.5,938.1 M1399.5,956.1 L1399.5,932.1 M1407.5,956.1 L1403.5,938.1" fill="none" stroke="#4f9a44" stroke-width="3.0" stroke-linecap="round" stroke-linejoin="round"/>

@@ -25,7 +25,7 @@ ap.add_argument("--judul", default="SAPTA PESONA")
 ap.add_argument("--sekolah", default="", help="nama sekolah (opsional, di bawah judul)")
 ap.add_argument("--tingkat", default="mudah,sedang,sulit")
 ap.add_argument("--prefix", default="mural")
-a = ap.parse_args()
+a = ap.parse_args([])          # nilai default saat diimpor sebagai modul
 
 PXM = 300                      # piksel per meter
 W, H = int(a.lebar * PXM), int(a.tinggi * PXM)
@@ -75,9 +75,11 @@ def line(x1, y1, x2, y2, c, w):
 
 
 def text(x, y, t, size, fill="#ffffff", w="bold", anchor="middle", stroke=None, sw=0):
-    st = f' stroke="{stroke}" stroke-width="{f(sw)}" paint-order="stroke"' if stroke else ""
-    add(f'<text x="{f(x)}" y="{f(y)}" font-family="Arial Rounded MT Bold, Helvetica, Arial, sans-serif" '
-        f'font-size="{f(size)}" font-weight="{w}" text-anchor="{anchor}" fill="{fill}"{st}>{html.escape(t)}</text>')
+    base = (f'x="{f(x)}" y="{f(y)}" font-family="Arial Rounded MT Bold, Helvetica, Arial, sans-serif" '
+            f'font-size="{f(size)}" font-weight="{w}" text-anchor="{anchor}"')
+    if stroke:   # garis tepi digambar lebih dulu agar isi huruf tetap utuh
+        add(f'<text {base} fill="{stroke}" stroke="{stroke}" stroke-width="{f(sw * 2)}" stroke-linejoin="round">{html.escape(t)}</text>')
+    add(f'<text {base} fill="{fill}">{html.escape(t)}</text>')
 
 
 # ================================================================== alam
@@ -601,44 +603,61 @@ DESK = {
 }
 LV = {"mudah": 1, "sedang": 2, "sulit": 3}
 
-results = {}
-for nm in [t.strip() for t in a.tingkat.split(",") if t.strip()]:
-    lvl = LV[nm]
-    svg = mural(lvl)
-    save(svg, f"{a.prefix}-{nm}")
-    save(with_grid(svg), f"{a.prefix}-{nm}-grid")
-    results[lvl] = svg
-    print(f"OK {a.prefix}-{nm}: {len(palette(svg))} warna")
 
-# lembar ringkasan
-SW, TW = 1900, 580
-th = TW * H / W
-SH = int(200 + th + 420)
-r = [f'<svg xmlns="http://www.w3.org/2000/svg" width="{SW}" height="{SH}" viewBox="0 0 {SW} {SH}">',
-     f'<rect width="{SW}" height="{SH}" fill="#fbfaf6"/>',
-     f'<text x="{SW / 2}" y="70" font-family="Helvetica, Arial" font-size="44" font-weight="bold" text-anchor="middle" fill="#2b2b2b">'
-     f'Desain Mural {html.escape(a.judul.title())} - Tema Hutan Alam</text>',
-     f'<text x="{SW / 2}" y="112" font-family="Helvetica, Arial" font-size="24" text-anchor="middle" fill="#555">'
-     f'Ukuran dinding {a.lebar:g} x {a.tinggi:g} m  |  SABIHA Arsitek</text>']
-for idx, lvl in enumerate(sorted(results)):
-    x0 = 50 + idx * (TW + 45)
-    y0 = 150
-    inner = results[lvl].split(">", 1)[1].rsplit("</svg>", 1)[0].replace('id="sky3"', f'id="sky3r{idx}"').replace("url(#sky3)", f"url(#sky3r{idx})")
-    r.append(f'<svg x="{x0}" y="{y0}" width="{TW}" height="{th:.0f}" viewBox="0 0 {W} {H}">{inner}</svg>')
-    r.append(f'<rect x="{x0}" y="{y0}" width="{TW}" height="{th:.0f}" fill="none" stroke="#2b2b2b" stroke-width="2"/>')
-    nm, pts = DESK[lvl]
-    ty = y0 + th + 50
-    r.append(f'<text x="{x0}" y="{ty:.0f}" font-family="Helvetica, Arial" font-size="32" font-weight="bold" fill="#2b2b2b">{nm}</text>')
-    for k, t in enumerate(pts):
-        r.append(f'<text x="{x0}" y="{ty + 40 + k * 32:.0f}" font-family="Helvetica, Arial" font-size="22" fill="#444">- {html.escape(t)}</text>')
-    pal = palette(results[lvl])
-    py = ty + 150
-    r.append(f'<text x="{x0}" y="{py:.0f}" font-family="Helvetica, Arial" font-size="22" font-weight="bold" fill="#2b2b2b">'
-             f'Palet cat: {len(pal)} warna</text>')
-    for k, c in enumerate(pal):
-        cx = x0 + (k % 14) * 41
-        cy = py + 18 + (k // 14) * 41
-        r.append(f'<rect x="{cx}" y="{cy:.0f}" width="34" height="34" rx="6" fill="{c}" stroke="#999" stroke-width="1.5"/>')
-r.append("</svg>")
-save("\n".join(r), f"ringkasan-{a.prefix}")
-print(f"OK ringkasan-{a.prefix}")
+def ringkasan(results, desk, judul, out, lebar=None, tinggi=None):
+    """Lembar ringkasan: 3 tingkat berdampingan + keterangan + palet cat."""
+    lebar = lebar or W / PXM
+    tinggi = tinggi or H / PXM
+    SW, TW = 1900, 580
+    th = TW * H / W
+    SH = int(200 + th + 460)
+    r = [f'<svg xmlns="http://www.w3.org/2000/svg" width="{SW}" height="{SH}" viewBox="0 0 {SW} {SH}">',
+         f'<rect width="{SW}" height="{SH}" fill="#fbfaf6"/>',
+         f'<text x="{SW / 2}" y="70" font-family="Helvetica, Arial" font-size="44" font-weight="bold" text-anchor="middle" fill="#2b2b2b">'
+         f'{html.escape(judul)}</text>',
+         f'<text x="{SW / 2}" y="112" font-family="Helvetica, Arial" font-size="24" text-anchor="middle" fill="#555">'
+         f'Ukuran dinding {lebar:g} x {tinggi:g} m  |  SABIHA Arsitek</text>']
+    for idx, lvl in enumerate(sorted(results)):
+        x0, y0 = 50 + idx * (TW + 45), 150
+        inner = results[lvl].split(">", 1)[1].rsplit("</svg>", 1)[0]
+        inner = re.sub(r'id="([\w-]+)"', lambda m: f'id="{m.group(1)}_r{idx}"', inner)
+        inner = re.sub(r'url\(#([\w-]+)\)', lambda m: f'url(#{m.group(1)}_r{idx})', inner)
+        r.append(f'<svg x="{x0}" y="{y0}" width="{TW}" height="{th:.0f}" viewBox="0 0 {W} {H}">{inner}</svg>')
+        r.append(f'<rect x="{x0}" y="{y0}" width="{TW}" height="{th:.0f}" fill="none" stroke="#2b2b2b" stroke-width="2"/>')
+        nm, pts = desk[lvl]
+        ty = y0 + th + 50
+        r.append(f'<text x="{x0}" y="{ty:.0f}" font-family="Helvetica, Arial" font-size="32" font-weight="bold" fill="#2b2b2b">{nm}</text>')
+        for k, t in enumerate(pts):
+            r.append(f'<text x="{x0}" y="{ty + 40 + k * 32:.0f}" font-family="Helvetica, Arial" font-size="22" fill="#444">- {html.escape(t)}</text>')
+        pal = palette(results[lvl])
+        py = ty + 150
+        r.append(f'<text x="{x0}" y="{py:.0f}" font-family="Helvetica, Arial" font-size="22" font-weight="bold" fill="#2b2b2b">'
+                 f'Palet cat: {len(pal)} warna</text>')
+        for k, c in enumerate(pal):
+            cx = x0 + (k % 14) * 41
+            cy = py + 18 + (k // 14) * 41
+            r.append(f'<rect x="{cx}" y="{cy:.0f}" width="34" height="34" rx="6" fill="{c}" stroke="#999" stroke-width="1.5"/>')
+    r.append("</svg>")
+    save("\n".join(r), out)
+
+
+def setup(lebar, tinggi):
+    """Atur ukuran kanvas (dipanggil juga oleh skrip tema lain)."""
+    global W, H, GROUND
+    W, H = int(lebar * PXM), int(tinggi * PXM)
+    GROUND = int(H * 0.60)
+
+
+if __name__ == "__main__":
+    a = ap.parse_args()
+    setup(a.lebar, a.tinggi)
+    results = {}
+    for nm in [t.strip() for t in a.tingkat.split(",") if t.strip()]:
+        lvl = LV[nm]
+        svg = mural(lvl)
+        save(svg, f"{a.prefix}-{nm}")
+        save(with_grid(svg), f"{a.prefix}-{nm}-grid")
+        results[lvl] = svg
+        print(f"OK {a.prefix}-{nm}: {len(palette(svg))} warna")
+    ringkasan(results, DESK, f"Desain Mural {a.judul.title()} - Tema Hutan Alam", f"ringkasan-{a.prefix}", a.lebar, a.tinggi)
+    print(f"OK ringkasan-{a.prefix}")

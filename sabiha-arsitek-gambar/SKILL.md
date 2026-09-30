@@ -40,6 +40,23 @@ Isi mural: papan judul, 7 papan nilai Sapta Pesona (AMAN, TERTIB, BERSIH, SEJUK,
 
 Aktivitas murid dipilih agar sesuai nilai Sapta Pesona: membuang sampah (Bersih), menanam bibit (Sejuk), memotret (Kenangan), melambai (Ramah).
 
+## Tema lain (tetap memuat 7 nilai Sapta Pesona)
+
+Generator: `scripts/mural_tema.py` (memakai fungsi gambar dari `mural_sapta_pesona.py`).
+
+```bash
+python3 scripts/mural_tema.py --tema kebunteh,pantai,kereta --lebar 6 --tinggi 4 --sekolah "SDN 1 CIANJUR"
+```
+
+| Tema | Referensi | Tempat 7 nilai |
+|---|---|---|
+| `kebunteh` | Kebun teh & Gunung Gede-Pangrango khas Cianjur, pohon pelindung, saung | 7 layang-layang, sebagian talinya dipegang murid |
+| `pantai` | Laut, pasir, mercusuar, pohon kelapa, istana pasir | Layar 7 perahu |
+| `kereta` | Sawah terasering, gunung, burung kuntul, orang-orangan sawah | 7 gerbong kereta, murid di jendela, guru jadi masinis |
+
+Hasil: `<tema>-<tingkat>.png/.svg`, `<tema>-<tingkat>-grid.png`, dan `ringkasan-<tema>.png`.
+Setiap tema tetap punya 3 tingkat (mudah, sedang, sulit) dengan pola tokoh yang sama: 1+2, 1+4, 2+6.
+
 ## Aturan menggambar
 
 - Tokoh dibuat orisinal dan sederhana. Jangan meniru karakter kartun terkenal atau logo resmi.
@@ -49,13 +66,14 @@ Aktivitas murid dipilih agar sesuai nilai Sapta Pesona: membuang sampah (Bersih)
 
 ## Rencana berikutnya
 
-- Tema lain (pantai, pegunungan, pertanian), mural literasi, dan mural profil pelajar Pancasila.
+- Mural literasi, mural profil pelajar Pancasila, dan tema lain sesuai permintaan sekolah.
 
 ## Struktur folder
 
 ```
 sabiha-arsitek-gambar/
   SKILL.md
-  scripts/mural_sapta_pesona.py
-  examples/  (mural-mudah/sedang/sulit, versi -grid, ringkasan-mural)
+  scripts/mural_sapta_pesona.py   (tema hutan alam + fungsi gambar bersama)
+  scripts/mural_tema.py           (tema kebun teh, pantai, kereta)
+  examples/  (mural-*, kebunteh-*, pantai-*, kereta-*, versi -grid, ringkasan-*)
 ```
