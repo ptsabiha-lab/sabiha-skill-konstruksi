@@ -6,6 +6,7 @@ Tema:
   kebunteh : kebun teh & gunung khas Cianjur, 7 nilai di layang-layang
   pantai   : pantai & laut, 7 nilai di layar perahu, mercusuar
   kereta   : kereta Sapta Pesona melintasi sawah terasering, 1 gerbong = 1 nilai
+  alam     : alam murni (gunung, air terjun, danau, hutan) TANPA tulisan dan tokoh
 
 Contoh:
   python3 mural_tema.py --tema kebunteh,pantai,kereta --lebar 6 --tinggi 4 --sekolah "SDN 1 CIANJUR"
@@ -599,6 +600,122 @@ def kereta(lvl):
     return end()
 
 
+# ====================================================================== 4. ALAM MURNI (tanpa teks & tokoh)
+def river_edges(y):
+    t = (y - 880) / (H - 880)
+    c = 980 + 520 * t ** 1.3
+    half = 55 + 150 * t
+    return c - half, c + half
+
+
+def rock(x, y, s, lvl):
+    ell(x, y, s, s * 0.6, "#8f949a")
+    if lvl >= 2:
+        ell(x + s * 0.25, y + s * 0.1, s * 0.6, s * 0.4, "#767b82")
+    if lvl == 3:
+        ell(x - s * 0.3, y - s * 0.25, s * 0.3, s * 0.15, "#aeb3b8")
+
+
+def alam(lvl):
+    rnd = random.Random(80 + lvl)
+    start()
+    sky(lvl, "#6fc3ec", "#f3fbff")
+    M.sun(lvl)
+    for cx, cy, s in ((W * 0.12, H * 0.12, 65), (W * 0.45, H * 0.1, 55), (W * 0.6, H * 0.3, 45))[: 2 if lvl == 1 else 3]:
+        M.cloud(cx, cy, s, lvl)
+    if lvl >= 2:
+        for bx, by, s in ((1050, 250, 22), (1110, 225, 17), (1180, 265, 19), (300, 330, 16))[: 3 if lvl == 2 else 4]:
+            M.bird(bx, by, s, lvl)
+    mountains(lvl, 650, [(250, 300, 430), (950, 400, 540), (1600, 330, 460)], "#a9c4d6", "#94b3c7", snow=True)
+    if lvl == 3:   # pelangi di atas air terjun
+        for k, c in enumerate(["#e84a5f", "#f7a531", "#ffd34d", "#4caf50", "#2f7fc1", "#b25fd1"]):
+            r = 520 - k * 18
+            path(f"M{680 - r},{760} A{r},{r} 0 0 1 {680 + r},{760}", stroke=c, sw=18)
+    M.hill(M.wave(650, 30, 1 / 250, 0.7), "#8fc79a")
+    if lvl >= 2:
+        M.hill(M.wave(705, 25, 1 / 200, 2.1), "#6fb87a")
+    # hutan belakang
+    for i, x in enumerate(range(20, W, 55 if lvl == 3 else (75 if lvl == 2 else 120))):
+        s = rnd.uniform(0.85, 1.15) * 125
+        (M.tree_pine if i % 2 or lvl == 1 else M.tree_round)(x + rnd.uniform(-10, 10), 760, s, lvl, dark=True)
+    rect(0, 740, W, H - 740, "#7cc36a")
+    if lvl == 3:
+        rect(0, 740, W, 40, "#6db85c")
+    # tebing & air terjun
+    cliff = [(420, 800), (460, 430), (560, 360), (700, 335), (820, 375), (890, 520), (910, 800)]
+    poly(cliff, "#8b7d6b")
+    if lvl >= 2:
+        poly([(700, 335), (820, 375), (890, 520), (910, 800), (760, 800)], "#6f6354")
+        poly([(460, 430), (560, 360), (700, 335), (820, 375), (800, 395), (690, 365), (570, 385), (480, 450)], "#5aa84f")
+    if lvl == 3:
+        for x1, y1, x2, y2 in ((500, 520, 560, 600), (820, 460, 860, 560), (480, 680, 540, 720)):
+            line(x1, y1, x2, y2, "#5d5245", 5)
+    poly([(625, 352), (712, 348), (735, 800), (612, 800)], "#bfe8f7")
+    if lvl >= 2:
+        for k in range(5):
+            x = 638 + k * 17
+            line(x, 365, x + (k - 2) * 4, 790, "#ffffff", 4)
+    # danau
+    ell(790, 840, 640, 115, "#4fb0dd")
+    # sungai ke depan
+    L, R = [], []
+    for y in range(880, H + 1, 20):
+        l, r = river_edges(y)
+        L.append((l, y))
+        R.append((r, y))
+    poly(L + R[::-1], "#4fb0dd")
+    if lvl >= 2:
+        for y in range(930, H, 70):
+            l, r = river_edges(y)
+            path(f"M{l + 20:.1f},{y} q18,-8 36,0 t36,0", stroke="#bfe8f7", sw=4)
+    if lvl >= 2:
+        ell(790, 835, 590, 90, "#6cc0e6")
+    if lvl == 3:
+        poly([(612, 800), (735, 800), (760, 900), (590, 900)], "#9ad7f0")
+        for x, y in ((420, 850), (1000, 870), (1180, 830), (600, 900)):
+            path(f"M{x},{y} q20,-8 40,0 t40,0", stroke="#d6f0fa", sw=3)
+        for x, y in ((360, 880), (1150, 890), (1260, 850)):   # teratai
+            ell(x, y, 34, 12, "#3f9a52")
+            circ(x + 8, y - 8, 9, "#f29ab0")
+    for x, r in ((640, 50), (710, 60), (780, 45)):   # buih air terjun
+        ell(x, 805, r, 22, "#ffffff")
+    # batu tepi air
+    for x, y, s in ((300, 920, 45), (1330, 900, 55), (860, 1010, 38), (1250, 1080, 50), (1700, 1160, 60))[: 3 if lvl == 1 else 5]:
+        rock(x, y, s, lvl)
+    # pohon samping & depan
+    for x, s in ((230, 330), (330, 280)) if lvl > 1 else ((260, 300),):
+        M.tree_pine(x, 790, s, lvl)
+    for x, s in ((1480, 320), (1600, 270)) if lvl > 1 else ((1520, 300),):
+        M.tree_pine(x, 790, s, lvl)
+    M.tree_round(90, H - 40, 480, lvl)
+    M.tree_round(W - 70, H - 40, 440, lvl)
+    if lvl >= 2:
+        M.bush(430, 1000, 70, lvl)
+        M.bush(1150, 980, 55, lvl)
+        M.bush(W - 330, H - 60, 75, lvl)
+        grass_tufts(lvl, rnd, 950, H - 10, 35 if lvl == 2 else 70)
+    # bunga (hindari sungai)
+    cols = ["#e84a5f", "#f7a531", "#b25fd1", "#ffffff"] if lvl == 3 else ["#e84a5f", "#f7a531"]
+    n = 8 if lvl == 1 else (16 if lvl == 2 else 30)
+    placed = 0
+    while placed < n:
+        x, y = rnd.uniform(200, W - 200), rnd.uniform(960, H - 15)
+        l, r = river_edges(y)
+        if l - 40 < x < r + 40:
+            continue
+        M.flower(x, y, 15 if lvl == 1 else 12, cols[placed % len(cols)], lvl)
+        placed += 1
+    if lvl == 3:
+        M.deer(620, 1010, 80)
+        M.rabbit(390, H - 50, 48)
+        M.mushroom(170, H - 20, 50)
+        M.mushroom(215, H - 15, 34)
+        M.butterfly(700, 1060, 22, "#f7a531", "#e84a5f")
+        M.butterfly(1500, 1000, 20, "#b25fd1", "#5bb7e0")
+        M.butterfly(980, 1130, 18, "#ffd34d", "#f7a531")
+    return end()
+
+
 # ====================================================================== jalankan
 TEMA = {
     "kebunteh": (kebunteh, "Kebun Teh & Layang-layang", {
@@ -613,6 +730,10 @@ TEMA = {
         1: ("MUDAH", ["Sawah terasering warna rata", "Lokomotif + 7 gerbong nilai", "1 guru + 2 murid"]),
         2: ("SEDANG", ["Murid di jendela, guru jadi masinis", "Ikon di gerbong, padi, burung", "1 guru + 4 murid beraktivitas"]),
         3: ("SULIT", ["Gradasi, gunung bersalju, air sawah", "Burung kuntul, orang-orangan sawah", "2 guru + 6 murid"])}),
+    "alam": (alam, "Alam Murni (tanpa teks & tokoh)", {
+        1: ("MUDAH", ["Warna rata, bentuk besar", "Gunung, tebing, air terjun, danau", "Tanpa tulisan & tokoh"]),
+        2: ("SEDANG", ["Dua tone, aliran air terjun", "Sungai, semak, burung", "Tanpa tulisan & tokoh"]),
+        3: ("SULIT", ["Gradasi, pelangi, pantulan danau", "Rusa, kelinci, kupu-kupu, teratai", "Tanpa tulisan & tokoh"])}),
 }
 
 for tema in [t.strip() for t in args.tema.split(",") if t.strip()]:
@@ -625,5 +746,5 @@ for tema in [t.strip() for t in args.tema.split(",") if t.strip()]:
         M.save(M.with_grid(svg), f"{tema}-{nm}-grid")
         results[lvl] = svg
         print(f"OK {tema}-{nm}: {len(M.palette(svg))} warna")
-    M.ringkasan(results, desk, f"Mural {args.judul.title()} - {nama}", f"ringkasan-{tema}", args.lebar, args.tinggi)
+    M.ringkasan(results, desk, f"Mural {nama}" if tema == "alam" else f"Mural {args.judul.title()} - {nama}", f"ringkasan-{tema}", args.lebar, args.tinggi)
     print(f"OK ringkasan-{tema}")
