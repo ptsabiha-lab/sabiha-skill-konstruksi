@@ -33,6 +33,14 @@ Hasil: satu lembar SVG + PNG berisi tampak depan, tampak samping, denah, dimensi
 python3 scripts/sketsa_gapura.py --bukaan 5 --tinggi-tiang 1.2 --nama "GAPURA SDN 1 CIANJUR" --out sketsa-v2
 ```
 
+Sketsa perspektif 3D (ukuran sama, untuk dibandingkan dengan foto acuan):
+
+```bash
+python3 scripts/perspektif_gapura.py --lebar-total 6 --dalam-atap 1.5 --out perspektif-v4
+```
+
+Opsi tambahan: `--yaw` (sudut putar) dan `--pitch` (sudut dari atas). Ada figur manusia 1,6 m sebagai skala.
+
 Parameter (meter): `--lebar-total` (bukaan dihitung otomatis), `--bukaan`, `--ped-lebar`, `--ped-dalam`, `--ped-tinggi`, `--tinggi-tiang`, `--overhang`, `--dalam-atap`, `--tinggi-atap`.
 
 Dimensi asumsi awal (dari foto, **wajib diverifikasi di lokasi**):
@@ -70,7 +78,8 @@ Satu folder per skill di repo yang sama: `sabiha-arsitek-gambar` (gambar kerja),
 ```
 sabiha-arsitek-gapura/
   SKILL.md
-  scripts/sketsa_gapura.py
+  scripts/sketsa_gapura.py        (tampak depan, samping, denah)
+  scripts/perspektif_gapura.py    (perspektif 3D)
   references/foto-referensi-gapura.jpg
-  examples/sketsa-gapura-v1.png, sketsa-gapura-v2.png, sketsa-gapura-v3.png, sketsa-gapura-v4.png (+ .svg)
+  examples/sketsa-gapura-v1.png, sketsa-gapura-v2.png, sketsa-gapura-v3.png, sketsa-gapura-v4.png, perspektif-gapura-v4.png (+ .svg)
 ```
