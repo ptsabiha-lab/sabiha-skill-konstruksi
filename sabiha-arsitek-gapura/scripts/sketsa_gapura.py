@@ -14,20 +14,25 @@ import argparse
 import html
 
 p = argparse.ArgumentParser()
-p.add_argument("--bukaan", type=float, default=6.0, help="lebar bukaan bersih antar pedestal")
+p.add_argument("--bukaan", type=float, default=3.0, help="lebar bukaan bersih antar pedestal")
+p.add_argument("--lebar-total", type=float, default=None, help="lebar total atap; jika diisi, bukaan dihitung otomatis")
 p.add_argument("--ped-lebar", type=float, default=1.2, help="lebar pedestal (arah jalan melintang)")
 p.add_argument("--ped-dalam", type=float, default=1.2, help="kedalaman pedestal (arah jalan memanjang)")
 p.add_argument("--ped-tinggi", type=float, default=2.0, help="tinggi pedestal beton")
 p.add_argument("--tinggi-tiang", type=float, default=1.0, help="tinggi tiang baja di atas pedestal")
-p.add_argument("--overhang", type=float, default=1.0, help="teritis atap di luar pedestal (kiri/kanan)")
+p.add_argument("--overhang", type=float, default=0.3, help="teritis atap di luar pedestal (kiri/kanan)")
 p.add_argument("--dalam-atap", type=float, default=1.5, help="kedalaman atap (arah jalan)")
 p.add_argument("--tinggi-atap", type=float, default=0.4, help="tinggi atap dari tepi ke bubungan")
 p.add_argument("--nama", default="GAPURA SEKOLAH")
-p.add_argument("--versi", default="v3", help="label versi di blok judul")
-p.add_argument("--out", default="sketsa-gapura-v3", help="nama file tanpa ekstensi")
+p.add_argument("--versi", default="v4", help="label versi di blok judul")
+p.add_argument("--out", default="sketsa-gapura-v4", help="nama file tanpa ekstensi")
 a = p.parse_args()
 
 B, PW, PD, PH = a.bukaan, a.ped_lebar, a.ped_dalam, a.ped_tinggi
+if a.lebar_total:                        # bukaan dihitung dari lebar total atap
+    B = a.lebar_total - 2 * a.overhang - 2 * a.ped_lebar
+    if B <= 0:
+        raise SystemExit("Lebar total terlalu kecil: bukaan <= 0. Kecilkan pedestal/teritis.")
 TH, OV, D, RISE = a.tinggi_tiang, a.overhang, a.dalam_atap, a.tinggi_atap
 W = 2 * OV + 2 * PW + B                  # lebar total atap
 Y_BEAM = PH + TH                         # bawah balok keliling

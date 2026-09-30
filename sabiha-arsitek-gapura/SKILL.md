@@ -33,18 +33,18 @@ Hasil: satu lembar SVG + PNG berisi tampak depan, tampak samping, denah, dimensi
 python3 scripts/sketsa_gapura.py --bukaan 5 --tinggi-tiang 1.2 --nama "GAPURA SDN 1 CIANJUR" --out sketsa-v2
 ```
 
-Parameter (meter): `--bukaan`, `--ped-lebar`, `--ped-dalam`, `--ped-tinggi`, `--tinggi-tiang`, `--overhang`, `--dalam-atap`, `--tinggi-atap`.
+Parameter (meter): `--lebar-total` (bukaan dihitung otomatis), `--bukaan`, `--ped-lebar`, `--ped-dalam`, `--ped-tinggi`, `--tinggi-tiang`, `--overhang`, `--dalam-atap`, `--tinggi-atap`.
 
 Dimensi asumsi awal (dari foto, **wajib diverifikasi di lokasi**):
 
 | Bagian | Nilai |
 |---|---|
-| Bukaan bersih | 6,00 m |
+| Bukaan bersih | 3,00 m (dihitung: lebar total 6,00 - 2 x pedestal 1,20 - 2 x teritis 0,30) |
 | Pedestal | 1,20 x 1,20 x 2,00 m |
 | Tiang baja di atas pedestal | 1,00 m |
 | Tinggi bebas bawah balok | 3,00 m |
-| Teritis atap di luar pedestal | 1,00 m |
-| Atap | lebar 10,40 m, dalam (ke samping) 1,50 m, tinggi 0,40 m |
+| Teritis atap di luar pedestal | 0,30 m |
+| Atap | lebar total 6,00 m, dalam (ke samping) 1,50 m, tinggi 0,40 m |
 | Tinggi total | sekitar 3,65 m |
 
 Aturan saat menggambar:
@@ -72,5 +72,5 @@ sabiha-arsitek-gapura/
   SKILL.md
   scripts/sketsa_gapura.py
   references/foto-referensi-gapura.jpg
-  examples/sketsa-gapura-v1.png, sketsa-gapura-v2.png, sketsa-gapura-v3.png (+ .svg)
+  examples/sketsa-gapura-v1.png, sketsa-gapura-v2.png, sketsa-gapura-v3.png, sketsa-gapura-v4.png (+ .svg)
 ```
