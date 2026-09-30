@@ -1,6 +1,6 @@
 ---
 name: sabiha-arsitek-gapura
-description: Membuat sketsa konsep dan (tahap berikutnya) RAB gapura sekolah rangka baja ringan dengan pedestal beton dan atap perisai spandek, untuk SABIHA Arsitek. Gunakan saat pengguna menyebut gapura, gerbang sekolah, sabiha arsitek gapura, sketsa gapura, atau RAB gapura.
+description: Membuat sketsa konsep gapura sekolah rangka baja ringan dengan pedestal beton dan atap perisai spandek, untuk SABIHA Arsitek. Gunakan saat pengguna menyebut gapura, gerbang sekolah, sabiha arsitek gapura, sketsa gapura, atau RAB gapura.
 ---
 
 # SABIHA Arsitek - Gapura
@@ -19,10 +19,10 @@ Foto acuan: `references/foto-referensi-gapura.jpg`
 
 ## Alur kerja (urutan wajib)
 
-1. **Sketsa dulu, RAB belakangan.** Jangan menghitung RAB sebelum sketsa disetujui pengguna.
+1. **Fokus utama: sketsa.** Jangan membahas biaya/RAB dan jangan menawarkan lanjut ke RAB. RAB hanya dikerjakan kalau pengguna memintanya sendiri.
 2. Tanyakan ukuran lokasi: lebar jalan/bukaan, tinggi bebas yang dibutuhkan (mobil, truk, ambulans), dan teks/logo sekolah yang akan dipasang.
 3. Jalankan generator sketsa dengan ukuran tersebut, tampilkan hasilnya, lalu revisi sampai disetujui.
-4. Setelah sketsa disetujui, baru masuk tahap RAB (lihat bagian RAB).
+4. Setiap revisi disimpan sebagai versi baru (v1, v2, ...) agar riwayat perubahan terlihat.
 
 ## Tahap 1 - Sketsa
 
@@ -52,9 +52,9 @@ Aturan saat menggambar:
 - Cek tinggi bebas terhadap kendaraan yang lewat. Untuk truk/ambulans, tinggi bebas minimal 4,0 m, sehingga `--tinggi-tiang` atau `--ped-tinggi` perlu dinaikkan.
 - Setelah membuat sketsa, periksa gambarnya (label tidak tumpang tindih, dimensi terbaca) sebelum diberikan ke pengguna.
 
-## Tahap 2 - RAB (belum dikerjakan)
+## Tahap 2 - RAB (ditunda, hanya jika diminta pengguna)
 
-Dikerjakan hanya setelah sketsa disetujui. Rencana isi:
+Saat ini TIDAK dikerjakan. Fokus pengguna adalah sketsa. Rencana isi bila nanti diminta:
 - Excel dengan openpyxl, formula hidup, siap dipakai di lapangan (sesuai kebiasaan pengguna).
 - Sheet: Input ukuran, Volume, Harga satuan, RAB per pekerjaan, Rekap, Daftar belanja per supplier.
 - Pekerjaan: persiapan, galian dan pondasi, pedestal (bata/beton, plester, acian, cat), rangka baja ringan (tiang, balok, kuda-kuda, reng), penutup atap spandek dan panel transparan, nok dan talang, finishing, papan nama/logo.
