@@ -15,16 +15,16 @@ import html
 
 p = argparse.ArgumentParser()
 p.add_argument("--bukaan", type=float, default=6.0, help="lebar bukaan bersih antar pedestal")
-p.add_argument("--ped-lebar", type=float, default=1.5, help="lebar pedestal (arah jalan melintang)")
+p.add_argument("--ped-lebar", type=float, default=1.2, help="lebar pedestal (arah jalan melintang)")
 p.add_argument("--ped-dalam", type=float, default=1.2, help="kedalaman pedestal (arah jalan memanjang)")
 p.add_argument("--ped-tinggi", type=float, default=2.0, help="tinggi pedestal beton")
 p.add_argument("--tinggi-tiang", type=float, default=1.0, help="tinggi tiang baja di atas pedestal")
 p.add_argument("--overhang", type=float, default=1.0, help="teritis atap di luar pedestal (kiri/kanan)")
-p.add_argument("--dalam-atap", type=float, default=3.0, help="kedalaman atap (arah jalan)")
-p.add_argument("--tinggi-atap", type=float, default=0.8, help="tinggi atap dari tepi ke bubungan")
+p.add_argument("--dalam-atap", type=float, default=1.5, help="kedalaman atap (arah jalan)")
+p.add_argument("--tinggi-atap", type=float, default=0.4, help="tinggi atap dari tepi ke bubungan")
 p.add_argument("--nama", default="GAPURA SEKOLAH")
-p.add_argument("--versi", default="v2", help="label versi di blok judul")
-p.add_argument("--out", default="sketsa-gapura-v2", help="nama file tanpa ekstensi")
+p.add_argument("--versi", default="v3", help="label versi di blok judul")
+p.add_argument("--out", default="sketsa-gapura-v3", help="nama file tanpa ekstensi")
 a = p.parse_args()
 
 B, PW, PD, PH = a.bukaan, a.ped_lebar, a.ped_dalam, a.ped_tinggi
@@ -235,8 +235,8 @@ line(dx(0) - 24, dy(D / 2), dx(W) + 24, dy(D / 2), 0.8, GRID, "14 4 3 4")
 dim_h(dx(OV + PW), dx(OV + PW + B), dy(D) + 34, f"{B:.2f} m")
 dim_h(dx(0), dx(W), dy(D) + 62, f"{W:.2f} m")
 dim_v(dx(0) - 34, dy(0), dy(D), f"{D:.2f}")
-text(dx(OV + PW / 2), dy(p0 + PD) + 20, "P1", 12, w="bold")
-text(dx(OV + PW + B + PW / 2), dy(p0 + PD) + 20, "P2", 12, w="bold")
+text(dx(OV + PW / 2), dy(D / 2) - 6, "P1", 13, w="bold")
+text(dx(OV + PW + B + PW / 2), dy(D / 2) - 6, "P2", 13, w="bold")
 
 # ================================================================ KETERANGAN
 KX, KY = 930, 690
